@@ -35,7 +35,7 @@ public abstract class Tile {
 
         }
         return Collections.unmodifiableMap(emptyTileMap);
-        // * return ImmuntableMap.copyOf(emptyTileMap); (guava)
+        // * return ImmutableMap.copyOf(emptyTileMap); (guava)
     }
 
     public static Tile createTile(final int tileCoordinate, final Piece piece) {
