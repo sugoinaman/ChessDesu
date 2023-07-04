@@ -20,14 +20,14 @@ public class BoardUtils {
     public static final boolean[] EIGHTH_COLUMN = initColumn(7);
 
     public static final int NUM_TILES=64;
-    public static final int NUM_TILES_PER_ROW
+    public static final int NUM_TILES_PER_ROW=8;
 
 
     private BoardUtils(){
         throw new RuntimeException("Cannot be instantiated");
     }
 
-    public static boolean isValidTileCoordinate(int coordinate){
+    public static boolean isValidTileCoordinate(final int coordinate){
         return (coordinate>=0 && coordinate<64);
     }
 }
