@@ -11,23 +11,26 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.chess.engine.board.Move.*;
+public class Queen extends Piece {
 
-public class Bishop extends Piece {
+    private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -8, -7, -1, 1, 7, 8, 9};
 
-    private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -7, 7, 9};
-    // collection of possible move offsets for the piece
-
-    Bishop(int piecePosition, Alliance pieceAlliance) {
+    Queen(int piecePosition, Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
     }
 
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset) {
-        return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == 7);
+        return BoardUtils.FIRST_COLUMN[currentPosition] &&
+                (candidateOffset == -1 ||
+                        candidateOffset == -9 ||
+                        candidateOffset == 7);
     }
 
     private static boolean isEighthColumnExclusion(final int currentPosition, final int candidateOffset) {
-        return BoardUtils.EIGHTH_COLUMN[currentPosition] && (candidateOffset == -7 || candidateOffset == 9);
+        return BoardUtils.EIGHTH_COLUMN[currentPosition] &&
+                (candidateOffset == -7 ||
+                        candidateOffset == 1 ||
+                        candidateOffset == 9);
     }
 
     @Override
@@ -49,7 +52,7 @@ public class Bishop extends Piece {
                         /*
                          * Not occupied so add the piece to the tile
                          */
-                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+                        legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
                     } else {
                         /*
                          * occupied, check if it's occupied by your piece color or enemy
@@ -57,7 +60,7 @@ public class Bishop extends Piece {
                         final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                         final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
                         if (this.pieceAlliance != pieceAlliance) {
-                            legalMoves.add(new AttackMove
+                            legalMoves.add(new Move.AttackMove
                                     (board, this, candidateDestinationCoordinate, pieceAtDestination));
                         }
                         break;
@@ -68,3 +71,6 @@ public class Bishop extends Piece {
         return ImmutableList.copyOf(legalMoves);
     }
 }
+
+
+
