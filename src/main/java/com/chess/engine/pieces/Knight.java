@@ -21,7 +21,7 @@ public class Knight extends Piece {
     }
 
     @Override
-    public Collection<Move> calculateLegalMoves(Board board) {
+    public Collection<Move> calculateLegalMoves(final Board board) {
 
 
         final List<Move> legalMoves = new ArrayList<>();
@@ -41,7 +41,7 @@ public class Knight extends Piece {
                     /*
                      * Not occupied so add the piece to the tile
                      */
-                    legalMoves.add(new Move());
+                    legalMoves.add(new Move.MajorMove(board,this, candidateDestinationCoordinate));
                 } else {
                     /*
                      * occupied, check if it's occupied by your piece color or enemy
@@ -49,7 +49,7 @@ public class Knight extends Piece {
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                     final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
                     if (this.pieceAlliance != pieceAlliance) {
-                        legalMoves.add(new Move());
+                        legalMoves.add(new Move.AttackMove(board,this,candidateDestinationCoordinate,pieceAtDestination));
                     }
                 }
             }
