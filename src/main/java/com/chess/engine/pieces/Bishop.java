@@ -18,7 +18,7 @@ public class Bishop extends Piece {
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -7, 7, 9};
     // collection of possible move offsets for the piece
 
-    Bishop(int piecePosition, Alliance pieceAlliance) {
+    public Bishop(int piecePosition, Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
     }
 
