@@ -14,8 +14,8 @@ public class King extends Piece {
 
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -8, -7, -1, 1, 7, 8, 9};
 
-    public King(int piecePosition, Alliance pieceAlliance) {
-        super(piecePosition, pieceAlliance);
+    public King(Alliance pieceAlliance,int piecePosition ) {
+        super(PieceType.KING,piecePosition, pieceAlliance);
     }
 
     @Override
@@ -59,5 +59,9 @@ public class King extends Piece {
 
     private static boolean isEighthColumnExclusion(final int currenPosition, final int candidateOffset) {
         return BoardUtils.EIGHTH_COLUMN[currenPosition] && (candidateOffset == -7 || candidateOffset == 1 || candidateOffset == 9);
+    }
+     @Override
+    public String toString(){
+        return PieceType.KING.toString();
     }
 }
