@@ -20,6 +20,8 @@ public abstract class Move {
         return this.destinationCoordinate;
     }
 
+    public abstract Board execute();
+
     public static final class  MajorMove extends Move{
 
         public MajorMove(final Board board,
@@ -27,6 +29,19 @@ public abstract class Move {
                          final int destinationCoordinate) {
             super(board, movedPiece, destinationCoordinate);
         }
+
+        @Override
+        public Board execute() {
+
+            final Board.Builder builder = new Board.Builder();
+            for(final Piece piece : this.board.currentPlayer().getActivePieces()){
+                if(!this.movedPiece.equals(piece)){
+                    builder.setPiece(piece);
+                }
+            }
+            return null;
+        }
+
     }
     public static final class AttackMove extends Move{
 
@@ -37,6 +52,11 @@ public abstract class Move {
                           final Piece attackPiece) {
             super(board, movedPiece, destinationCoordinate);
             this.attackPiece = attackPiece;
+        }
+
+        @Override
+        public Board execute() {
+            return null;
         }
     }
 }

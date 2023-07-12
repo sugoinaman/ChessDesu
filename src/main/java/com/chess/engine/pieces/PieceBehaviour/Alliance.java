@@ -1,5 +1,7 @@
 package com.chess.engine.pieces.PieceBehaviour;
 
+import com.chess.engine.Player.Player;
+
 public enum Alliance implements Behaviour{
     WHITE {
         @Override
@@ -15,6 +17,12 @@ public enum Alliance implements Behaviour{
         @Override
         public boolean isWhite() {
             return true;
+        }
+
+        @Override
+        public Player choosePlayer(final Player whitePlayer,
+                                   final Player blackPlayer) {
+            return whitePlayer;
         }
     },
     BLACK {
@@ -32,9 +40,19 @@ public enum Alliance implements Behaviour{
         public boolean isWhite() {
             return false;
         }
+
+        @Override
+        public Player choosePlayer(final Player whitePlayer,
+                                   final Player blackPlayer) {
+            return blackPlayer;
+        }
     };
 
+    public abstract int getDirection();
+    public abstract boolean isBlack();
+    public abstract boolean isWhite();
 
+    public abstract Player choosePlayer(Player whitePlayer, Player blackPlayer);
 
 
 
