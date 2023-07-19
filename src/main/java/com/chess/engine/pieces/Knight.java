@@ -85,6 +85,11 @@ public class Knight extends Piece {
                         (candidateOffset == 10) ||
                         (candidateOffset == 17));
     }
+
+    @Override
+    public Knight movePiece(Move move) {
+        return new Knight(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
+    }
      @Override
     public String toString(){
         return PieceType.KNIGHT.toString();

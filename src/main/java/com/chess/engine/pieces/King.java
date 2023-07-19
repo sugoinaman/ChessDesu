@@ -60,6 +60,10 @@ public class King extends Piece {
     private static boolean isEighthColumnExclusion(final int currenPosition, final int candidateOffset) {
         return BoardUtils.EIGHTH_COLUMN[currenPosition] && (candidateOffset == -7 || candidateOffset == 1 || candidateOffset == 9);
     }
+    @Override
+    public King movePiece(Move move) {
+        return new King(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
+    }
      @Override
     public String toString(){
         return PieceType.KING.toString();

@@ -41,11 +41,15 @@ public abstract class Move {
             for(final Piece piece: this.board.getCurrentPlayer().getOpponent().getActivePieces()){
                 builder.setPiece(piece);
             }
-            builder.setPiece(null);
+            builder.setPiece(this.movedPiece.movePiece(this));
             builder.setMoveMaker(this.board.getCurrentPlayer().getOpponent().getAlliance());
             return builder.build();
         }
 
+    }
+
+    public Piece getMovedPiece() {
+        return this.movedPiece;
     }
     public static final class AttackMove extends Move{
 
