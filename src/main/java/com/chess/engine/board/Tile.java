@@ -25,6 +25,14 @@ public abstract class Tile {
     */
     private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = createAllPossibleEmptyTiles();
 
+    public abstract boolean isTileOccupied();
+
+    public abstract Piece getPiece();
+
+     private Tile(final int tileCoordinate) {
+        this.tileCoordinate = tileCoordinate;
+    }
+
     private static Map<Integer, EmptyTile> createAllPossibleEmptyTiles() {
 
         final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
@@ -35,25 +43,22 @@ public abstract class Tile {
         }
         return Collections.unmodifiableMap(emptyTileMap);
         /*
-          * return ImmutableMap.copyOf(emptyTileMap);
-          * from guava library
+         * return ImmutableMap.copyOf(emptyTileMap);
+         * from guava library
          */
     }
 
     public static Tile createTile(final int tileCoordinate, final Piece piece) {
-        if (piece == null) {
+        if (piece != null) {
+            //if piece is not null then return occupied tile with piece
             return new OccupiedTile(tileCoordinate, piece);
         }
         return EMPTY_TILES_CACHE.get(tileCoordinate);
+        //if piece is null then return empty tile
+
+        // only way to create a tile is through this method
     }
 
-    private Tile(final int tileCoordinate) {
-        this.tileCoordinate = tileCoordinate;
-    }
-
-    public abstract boolean isTileOccupied();
-
-    public abstract Piece getPiece();
 
     public static final class EmptyTile extends Tile {
         private EmptyTile(final int coordinate) {
@@ -61,7 +66,7 @@ public abstract class Tile {
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return "-";
         }
 
@@ -80,7 +85,7 @@ public abstract class Tile {
 
         private final Piece pieceOnTile;
 
-        private OccupiedTile( final int tileCoordinate, final Piece pieceOnTile) {
+        private OccupiedTile(final int tileCoordinate, final Piece pieceOnTile) {
             super(tileCoordinate);
             this.pieceOnTile = pieceOnTile;
         }
@@ -91,8 +96,8 @@ public abstract class Tile {
         }
 
         @Override
-        public String toString(){
-            return getPiece().getPieceAlliance().isBlack() ? getPiece().toString().toLowerCase():
+        public String toString() {
+            return getPiece().getPieceAlliance().isBlack() ? getPiece().toString().toLowerCase() :
                     getPiece().toString();
         }
 
