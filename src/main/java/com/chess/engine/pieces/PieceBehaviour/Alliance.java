@@ -48,9 +48,15 @@ public enum Alliance implements Behaviour{
         }
     };
 
+    /**
+     * Redeclaring these variables for documentation
+     * @return
+     */
+
     public abstract int getDirection();
     public abstract boolean isBlack();
     public abstract boolean isWhite();
+
 
     public abstract Player choosePlayer(Player whitePlayer, Player blackPlayer);
 

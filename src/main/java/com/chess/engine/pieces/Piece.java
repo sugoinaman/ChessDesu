@@ -9,14 +9,19 @@ import java.util.Collection;
 public abstract class Piece {
 
 
+    //The type of piece for e.g. pawn, rook etc.
     protected final PieceType pieceType;
+
+    // The piece position
     protected final int piecePosition;
+
+    // White or black
     protected final Alliance pieceAlliance;
     protected final boolean isFirstMove;
     private final int cachedHashCode;
 
     Piece(final PieceType pieceType,
-            final int piecePosition, final Alliance pieceAlliance) {
+          final int piecePosition, final Alliance pieceAlliance) {
         this.pieceType = pieceType;
         this.piecePosition = piecePosition;
         this.pieceAlliance = pieceAlliance;
@@ -26,29 +31,30 @@ public abstract class Piece {
 
     private int computeHashCode() {
         int result = pieceType.hashCode();
-        result = 31*result+pieceAlliance.hashCode();
-        result =31*result +piecePosition;
-        result =31*result +(isFirstMove?1:0);
+        result = 31 * result + pieceAlliance.hashCode();
+        result = 31 * result + piecePosition;
+        result = 31 * result + (isFirstMove ? 1 : 0);
         return result;
     }
 
     @Override
     public boolean equals(final Object other) {
-        if(this==other){
+        if (this == other) {
             return true;
         }
-        if(!(other instanceof  Piece)){
+        if (!(other instanceof Piece)) {
             return false;
         }
-        final Piece otherPiece= (Piece) other;
-        return piecePosition==otherPiece.getPiecePosition()&&
-                pieceType==otherPiece.getPieceType()&&
-                pieceAlliance==otherPiece.getPieceAlliance()&&
-                isFirstMove== otherPiece.isFirstMove();
+        final Piece otherPiece = (Piece) other;
+        return piecePosition == otherPiece.getPiecePosition() &&
+                pieceType == otherPiece.getPieceType() &&
+                pieceAlliance == otherPiece.getPieceAlliance() &&
+                isFirstMove == otherPiece.isFirstMove();
 
     }
+
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return this.cachedHashCode;
     }
 
@@ -63,10 +69,12 @@ public abstract class Piece {
     public Alliance getPieceAlliance() {
         return this.pieceAlliance;
     }
+
     public PieceType getPieceType() {
         return this.pieceType;
     }
 
+    // Collection of legal moves a piece can make
     public abstract Collection<Move> calculateLegalMoves(final Board board);
 
     public abstract Piece movePiece(Move move);
@@ -117,15 +125,12 @@ public abstract class Piece {
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return this.pieceName;
         }
 
         public abstract boolean isKing();
     }
-
-
-
 
 
 }

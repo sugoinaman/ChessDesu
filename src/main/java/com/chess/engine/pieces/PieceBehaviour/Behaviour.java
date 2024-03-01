@@ -1,8 +1,8 @@
 package com.chess.engine.pieces.PieceBehaviour;
 
 public interface Behaviour {
-    public abstract int getDirection();
+    int getDirection();
 
-    public abstract boolean isBlack();
-    public abstract boolean isWhite();
+    boolean isBlack();
+    boolean isWhite();
 }

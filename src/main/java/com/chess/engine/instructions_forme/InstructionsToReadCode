@@ -1,0 +1,12 @@
+To understand the code read these classes first:
+
+1. Tile
+2. Piece
+3. Alliance
+4. Board
+5. Chess pieces e.g Knight
+ -> We calculate the valid move offset by taking an example from img.png. if the knight is on
+    position 35 it can move to position 29 and so on and so forth, there we can get legal
+    offsets for the knight and for the rest of the pieces.
+
+
