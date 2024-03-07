@@ -12,7 +12,7 @@ public abstract class Piece {
     //The type of piece for e.g. pawn, rook etc.
     protected final PieceType pieceType;
 
-    // The piece position
+    // the position piece is at
     protected final int piecePosition;
 
     // White or black
@@ -74,7 +74,11 @@ public abstract class Piece {
         return this.pieceType;
     }
 
-    // Collection of legal moves a piece can make
+    /**
+     * a collection of legal moves might be used when let's say a player equipped a knight
+     * then our GUI will show what moves he can make, maybe highlight those moves.
+     * To perform the checks we see if its valid position and if the tile is already not occupied.
+     */
     public abstract Collection<Move> calculateLegalMoves(final Board board);
 
     public abstract Piece movePiece(Move move);

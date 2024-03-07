@@ -14,12 +14,14 @@ import java.util.List;
 public class Knight extends Piece {
 
     // collection of possible move offsets for the piece
+    // if a knight is at pos x its legal moves is x + CANDIDATE_MOVE_COORDINATE
     private final static int[] CANDIDATE_MOVE_COORDINATE = {-17, -15, -10, -6, 6, 10, 15, 17};
 
 
     public Knight( final Alliance pieceAlliance,final int piecePosition) {
         super(PieceType.KNIGHT,piecePosition, pieceAlliance);
     }
+
 
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
@@ -39,16 +41,20 @@ public class Knight extends Piece {
                 }
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                 if (!candidateDestinationTile.isTileOccupied()) {
-                    /*
+                    /**
                      * Not occupied so add the piece to the tile
                      */
                     legalMoves.add(new Move.MajorMove(board,this, candidateDestinationCoordinate));
                 } else {
-                    /*
+                    /**
                      * occupied, check if it's occupied by your piece color or enemy
                      */
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                     final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
+                    /**
+                     * here we also need to add the legal moves where a player can dethrone the opponent's piece
+                     * so we check if their alliances are different and then also add it to legal moves
+                     */
                     if (this.pieceAlliance != pieceAlliance) {
                         legalMoves.add(new Move.AttackMove(board,this,candidateDestinationCoordinate,pieceAtDestination));
                     }
@@ -59,7 +65,17 @@ public class Knight extends Piece {
     }
 
 
+    /**
+     * solve an exception where let's say if we were at first column as a knight, and we moved -10 offset
+     * we would reach the far right side of the board.
+     * Same case if our knight was in second column we need some exclusions for edge cases.
+     * @param currentPosition
+     * @param candidateOffSet
+     * @return boolean
+     */
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffSet) {
+
+        //current position should be 0, and then we perform these checks
         return BoardUtils.FIRST_COLUMN[currentPosition] &&
                 ((candidateOffSet == -17) ||
                         (candidateOffSet == -10) ||

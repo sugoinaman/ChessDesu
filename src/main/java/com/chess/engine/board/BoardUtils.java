@@ -2,6 +2,10 @@ package com.chess.engine.board;
 
 
 public class BoardUtils {
+    /**
+     * we intitialise the particular column number or row number with true
+     * (could have also just used indices)
+     */
 
     public static final boolean[] FIRST_COLUMN = initColumn(0);
     public static final boolean[] SECOND_COLUMN = initColumn(1);
@@ -39,6 +43,7 @@ public class BoardUtils {
 
 
     public static boolean isValidTileCoordinate(final int coordinate) {
+        //simply return if the coordinate is between [0,64}
         return (coordinate >= 0 && coordinate < 64);
     }
 }

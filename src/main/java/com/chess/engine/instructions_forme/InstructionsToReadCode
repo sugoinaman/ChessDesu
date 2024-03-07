@@ -8,5 +8,5 @@ To understand the code read these classes first:
  -> We calculate the valid move offset by taking an example from img.png. if the knight is on
     position 35 it can move to position 29 and so on and so forth, there we can get legal
     offsets for the knight and for the rest of the pieces.
-
+6. Move (just a bit)
 
