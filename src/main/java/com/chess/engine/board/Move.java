@@ -6,8 +6,10 @@ public abstract class Move {
 
     // current state of board
     final Board board;
+
     // piece that is being moved
     final Piece movedPiece;
+
     //the coordinate the piece is being moved to
     final int destinationCoordinate;
 

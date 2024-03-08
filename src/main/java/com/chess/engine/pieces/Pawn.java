@@ -13,9 +13,10 @@ import java.util.List;
 public class Pawn extends Piece {
 
     private final static int[] CANDIDATE_MOVE_COORDINATE = {7, 8, 9, 16};
+    // 7 and 9 are attacking offsets while 8 is move forward once and 16 is move forward twice(only in beg.)
 
-    public Pawn(final Alliance pieceAlliance,final int piecePosition ) {
-        super(PieceType.PAWN,piecePosition, pieceAlliance);
+    public Pawn(final Alliance pieceAlliance, final int piecePosition) {
+        super(PieceType.PAWN, piecePosition, pieceAlliance);
     }
 
     @Override
@@ -67,12 +68,13 @@ public class Pawn extends Piece {
         return ImmutableList.copyOf(legalMoves);
     }
 
-   @Override
+    @Override
     public Pawn movePiece(Move move) {
         return new Pawn(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
     }
-     @Override
-    public String toString(){
+
+    @Override
+    public String toString() {
         return PieceType.PAWN.toString();
     }
 

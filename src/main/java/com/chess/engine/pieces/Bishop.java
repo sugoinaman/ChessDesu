@@ -18,8 +18,8 @@ public class Bishop extends Piece {
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -7, 7, 9};
     // collection of possible move offsets for the piece
 
-    public Bishop(Alliance pieceAlliance,int piecePosition ) {
-        super(PieceType.BISHOP,piecePosition, pieceAlliance);
+    public Bishop(Alliance pieceAlliance, int piecePosition) {
+        super(PieceType.BISHOP, piecePosition, pieceAlliance);
     }
 
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset) {
@@ -46,12 +46,12 @@ public class Bishop extends Piece {
                 if (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
                     final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                     if (!candidateDestinationTile.isTileOccupied()) {
-                        /*
+                        /**
                          * Not occupied so add the piece to the tile
                          */
                         legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
                     } else {
-                        /*
+                        /**
                          * occupied, check if it's occupied by your piece color or enemy
                          */
                         final Piece pieceAtDestination = candidateDestinationTile.getPiece();
@@ -74,7 +74,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return PieceType.BISHOP.toString();
     }
 }

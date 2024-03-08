@@ -43,12 +43,14 @@ public class Knight extends Piece {
                 if (!candidateDestinationTile.isTileOccupied()) {
                     /**
                      * Not occupied so add the piece to the tile
+                     * "this" keyword here means that we are passing an instance of the class itself which is what
+                     * is required "piece"
                      */
                     legalMoves.add(new Move.MajorMove(board,this, candidateDestinationCoordinate));
                 } else {
-                    /**
-                     * occupied, check if it's occupied by your piece color or enemy
-                     */
+
+                     // occupied, check if it's occupied by your piece color or enemy
+
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                     final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
                     /**
