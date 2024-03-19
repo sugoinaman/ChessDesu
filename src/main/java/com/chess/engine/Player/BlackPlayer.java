@@ -30,4 +30,8 @@ public class BlackPlayer extends Player {
     public Player getOpponent() {
         return this.getWhitePlayer();
     }
+
+    private Player getWhitePlayer() {
+        return this.board.whiteplayer();
+    }
 }

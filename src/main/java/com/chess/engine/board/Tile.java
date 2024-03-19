@@ -58,7 +58,7 @@ public abstract class Tile {
         }
         return EMPTY_TILES_CACHE.get(tileCoordinate);
         /**
-         * if piece is null then return empty tile, i is tileCoordinate
+         * if piece is null then return empty tile instance, i is tileCoordinate
          * only way to create a tile is through this method
          */
     }

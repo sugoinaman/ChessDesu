@@ -12,6 +12,7 @@ import java.util.*;
 public class Board {
 
     private final List<Tile> gameBoard;
+    //cant have immutable arrays in java so we chose a list.
     private final Collection<Piece> whitePieces;
     private final Collection<Piece> blackPieces;
 
@@ -95,10 +96,12 @@ public class Board {
     }
 
 
+    // TODO Understand the createGameBoard method
     private static List<Tile> createGameBoard(final Builder builder) {
         final Tile[] tiles = new Tile[BoardUtils.NUM_TILES];
         for (int i = 0; i < BoardUtils.NUM_TILES; i++) {
-            tiles[i] = Tile.createTile(i, builder.boardConfig.get(i));
+            tiles[i] = Tile.createTile(i, builder.boardConfig.get(i)); // one a tile where a piece is present is mapped
+
         }
         return ImmutableList.copyOf(tiles);
     }
@@ -158,7 +161,7 @@ public class Board {
         }
 
         public Builder setPiece(final Piece piece) {
-            this.boardConfig.put(piece.getPiecePosition(), piece);
+            this.boardConfig.put(piece.getPiecePosition(), piece); //mapped piece position with piece.
             return this;
         }
 

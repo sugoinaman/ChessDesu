@@ -30,25 +30,34 @@ public class Pawn extends Piece {
             if (!BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
                 break;
             }
+
+
+            // actual code starts here
             if (currentCandidateOffSet == 8 && !board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                 legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
-            } else if (currentCandidateOffSet == 16 && this.isFirstMove() &&
-                    (BoardUtils.SECOND_ROW[this.piecePosition] && this.getPieceAlliance().isBlack()) ||
-                    (BoardUtils.SEVENTH_ROW[this.piecePosition] && this.getPieceAlliance().isWhite())) {
+            }
+
+
+            else if (currentCandidateOffSet == 16 && this.isFirstMove() &&
+                    (BoardUtils.SECOND_ROW[this.piecePosition] && this.getPieceAlliance().isBlack()) || //he's black and in 2nd row
+                    (BoardUtils.SEVENTH_ROW[this.piecePosition] && this.getPieceAlliance().isWhite())) {//he's white, and he's in 7th row(first move)
                 final int behindCandidateDestinationCoordinate = this.piecePosition +
-                        (this.pieceAlliance.getDirection() * 8);
+                        (this.pieceAlliance.getDirection() * 8); //the position of tile behind the destination tile(the +16 tile). we check if it's not occupied
                 if (!board.getTile(behindCandidateDestinationCoordinate).isTileOccupied()
                         && !board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
                 }
-            } else if (currentCandidateOffSet == 7 &&
+            }
+
+
+            else if (currentCandidateOffSet == 7 &&
                     !((BoardUtils.EIGHTH_COLUMN[this.piecePosition] && this.pieceAlliance.isWhite() ||
-                            (BoardUtils.FIRST_COLUMN[this.piecePosition] && this.pieceAlliance.isBlack())))) {
+                            (BoardUtils.FIRST_COLUMN[this.piecePosition] && this.pieceAlliance.isBlack())))) {  // this is exclusion. a black piece cant move +7 if its on first column.
                 if (board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
                         // attack move
-                        legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
+                       legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
                     }
                 }
 
@@ -59,7 +68,7 @@ public class Pawn extends Piece {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
                         // attack move
-                        legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
+                        legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
                     }
                 }
             }

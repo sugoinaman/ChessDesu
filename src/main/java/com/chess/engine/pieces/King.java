@@ -26,7 +26,6 @@ public class King extends Piece {
         for (final int currentCandidateOffset : CANDIDATE_MOVE_VECTOR_COORDINATES) {
 
             final int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
-
             if (isFirstColumnExclusion(this.piecePosition, currentCandidateOffset) || isEighthColumnExclusion(this.piecePosition, currentCandidateOffset)) {
                 continue;
             }

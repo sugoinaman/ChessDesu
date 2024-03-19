@@ -3,7 +3,7 @@ package com.chess.engine.board;
 
 public class BoardUtils {
     /**
-     * we intitialise the particular column number or row number with true
+     * we initialise the particular column number or row number with true
      * (could have also just used indices)
      */
 
@@ -19,7 +19,7 @@ public class BoardUtils {
 
     private BoardUtils() {
         throw new RuntimeException("Cannot be instantiated");
-    }
+    } //hence private
 
     private static boolean[] initColumn(int columnNumber) {
         final boolean[] column = new boolean[NUM_TILES];

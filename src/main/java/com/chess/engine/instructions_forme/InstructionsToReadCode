@@ -3,7 +3,7 @@ To understand the code read these classes first:
 1. Tile
 2. Piece
 3. Alliance
-4. Board
+4. //Board
 5. Chess pieces e.g Knight
  -> We calculate the valid move offset by taking an example from img.png. if the knight is on
     position 35 it can move to position 29 and so on and so forth, there we can get legal
@@ -17,3 +17,6 @@ To understand the code read these classes first:
     Knight - Moves in an ‘L-shape,’ two squares in a straight direction, and then one square perpendicular to that.
     Pawn - Moves one square forward, but on its first move, it can move two squares forward. It captures diagonally one square forward.
 
+    **NOTE** EVERY PIECE CAN MOVE BACK EXCEPT PAWN SO WE HARD CODED THE DIRECTION IT MOVES. E.g. White -1. black +1
+
+8. Board class
