@@ -2,6 +2,7 @@ package com.chess.engine.board;
 
 import com.chess.engine.pieces.Piece;
 import com.google.common.collect.ImmutableMap;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,7 +17,13 @@ public abstract class Tile {
     // The coordinate of this tile on the board.
     protected final int tileCoordinate;
 
-    // A cache of all possible empty tiles, indexed by their coordinates.
+    /** A cache of all possible empty tiles, indexed by their coordinates.
+     * This is called Flyweight Design Pattern, and it is used when we want to create
+     * many similar objects. For example, at the start of the game the tiles are mostly
+     * empty. We create empty tiles and map those empty tiles with the index as index.
+     * this results might lead to memory efficiency in large production environments and
+     * performance efficiency as well.
+     */
     private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = createAllPossibleEmptyTiles();
 
     /**
@@ -58,7 +65,7 @@ public abstract class Tile {
         }
         return EMPTY_TILES_CACHE.get(tileCoordinate);
         /**
-         * if piece is null then return empty tile instance, i is tileCoordinate
+         * if piece is null then return empty tile instance, 'i' is tileCoordinate
          * only way to create a tile is through this method
          */
     }
