@@ -7,6 +7,7 @@ public class MoveTransition {
 
     private final Board transitionBoard;
     private final Move move;
+    private final MoveStatus moveStatus;
 
     public MoveTransition(Board transitionBoard, Move move,
                           MoveStatus moveStatus) {
@@ -15,7 +16,6 @@ public class MoveTransition {
         this.moveStatus = moveStatus;
     }
 
-    private final MoveStatus moveStatus;
 
     public MoveStatus getMoveStatus() {
         return this.moveStatus;

@@ -20,3 +20,4 @@ To understand the code read these classes first:
     **NOTE** EVERY PIECE CAN MOVE BACK EXCEPT PAWN SO WE HARD CODED THE DIRECTION IT MOVES. E.g. White -1. black +1
 
 8. Board class (Takes time)
+9. Player package

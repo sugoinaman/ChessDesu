@@ -19,14 +19,13 @@ public abstract class Player {
     private final boolean isInCheck;
 
 
-    Player(final Board board,
-           final Collection<Move> legalMoves,
-           final Collection<Move> opponentMoves) {
+    Player(final Board board, final Collection<Move> legalMoves, final Collection<Move> opponentMoves) {
         this.board = board;
         this.playerKing = establishKing();
         this.legalMoves = legalMoves;
-        this.isInCheck = !Player.calculateAttacksOnTile
-                (this.playerKing.getPiecePosition(), opponentMoves).isEmpty();
+        this.isInCheck = !Player.calculateAttacksOnTile(this.playerKing.getPiecePosition(), opponentMoves).isEmpty();
+        // a player is in check when the opponent moves has king's piece position in the collection
+
     }
 
     public King getPlayerKing() {
@@ -64,6 +63,7 @@ public abstract class Player {
 
     public boolean isInCheck() {
         return this.board.getCurrentPlayer().getOpponent().getLegalMoves().contains(this.playerKing.getPiecePosition());
+        //if a piece has a legal move which targets enemy king = check mate
     }
 
     private Collection<Move> getLegalMoves() {
@@ -86,20 +86,25 @@ public abstract class Player {
 
     public boolean isInStaleMate() {
         return !this.isInCheck() && !hasEscapeMoves();
-        //not in check atm but our moves are in check
+        //not in check atm but our moves are in check OR we are not in check yet but any move made and our king will be in check
     }
 
     public boolean isCastled() {
         return false;
     }
 
+    /**
+     *
+     * @implNote  MoveTransition
+     * @ The move transition is a way of tracking the board before the move was made and AFTER the move was made,
+     * as well as if the move was successfully made or not.
+     */
     public MoveTransition makeMove(final Move move) {
         if (!isMoveLegal(move)) {
             return new MoveTransition(this.board, move, MoveStatus.ILLEGAL_MOVE);
         }
         final Board transitionBoard = move.execute();
-        final Collection<Move> kingAttacks = this.calculateAttacksOnTile(transitionBoard.getCurrentPlayer().getOpponent().getPlayerKing().getPiecePosition(),
-                transitionBoard.getCurrentPlayer().getLegalMoves());
+        final Collection<Move> kingAttacks = this.calculateAttacksOnTile(transitionBoard.getCurrentPlayer().getOpponent().getPlayerKing().getPiecePosition(), transitionBoard.getCurrentPlayer().getLegalMoves());
         if (!kingAttacks.isEmpty()) {
             return new MoveTransition(this.board, move, MoveStatus.LEAVES_PLAYER_IN_CHECK);
         }
