@@ -6,6 +6,7 @@ import com.chess.engine.Player.WhitePlayer;
 import com.chess.engine.pieces.*;
 import com.chess.engine.pieces.PieceBehaviour.Alliance;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 import java.util.*;
 
@@ -37,7 +38,7 @@ public class Board {
 
     }
 
-    @Override
+    @Override 
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < BoardUtils.NUM_TILES; i++) {
@@ -158,6 +159,10 @@ public class Board {
         builder.setPiece(new Rook(Alliance.WHITE, 63));
         builder.setMoveMaker(Alliance.WHITE);
         return builder.build();
+    }
+
+    public Iterable<Move> getAllLegalMoves() {
+        return Iterables.unmodifiableIterable(Iterables.concat(this.whitePlayer,getle))
     }
 
 

@@ -39,10 +39,10 @@ public abstract class Piece {
 
     @Override
     public boolean equals(final Object other) {
-        if (this == other) {
+        if (this == other) {   // shortcut => if they are referentially equal then return true
             return true;
         }
-        if (!(other instanceof Piece)) {
+        if (!(other instanceof Piece)) { //if the other object is not an instance of Piece then return false
             return false;
         }
         final Piece otherPiece = (Piece) other;

@@ -101,14 +101,19 @@ public abstract class Player {
      */
     public MoveTransition makeMove(final Move move) {
         if (!isMoveLegal(move)) {
-            return new MoveTransition(this.board, move, MoveStatus.ILLEGAL_MOVE);
+            return new MoveTransition(this.board, move, MoveStatus.ILLEGAL_MOVE); //returning the same board when the move is illegal
         }
+        // We create a new Board everytime a move is legal, this is because our board class is immutable, so we cannot mutate it.
         final Board transitionBoard = move.execute();
-        final Collection<Move> kingAttacks = this.calculateAttacksOnTile(transitionBoard.getCurrentPlayer().getOpponent().getPlayerKing().getPiecePosition(), transitionBoard.getCurrentPlayer().getLegalMoves());
+
+        final Collection<Move> kingAttacks = this.calculateAttacksOnTile(transitionBoard.getCurrentPlayer().getOpponent().getPlayerKing().getPiecePosition(),
+                transitionBoard.getCurrentPlayer().getLegalMoves());
+        // are there any attacks on the current player's king and if it will leave player in check
+
         if (!kingAttacks.isEmpty()) {
             return new MoveTransition(this.board, move, MoveStatus.LEAVES_PLAYER_IN_CHECK);
         }
-        return new MoveTransition(transitionBoard, move, MoveStatus.DONE);
+        return new MoveTransition(transitionBoard, move, MoveStatus.DONE); //return new transition mode when MoveStatus is done
     }
 
     public abstract Collection<Piece> getActivePieces();

@@ -21,3 +21,7 @@ To understand the code read these classes first:
 
 8. Board class (Takes time)
 9. Player package
+
+NOTE: We create a new Board everytime a move is legal, this is because our board class is immutable so we cannot mutate it.
+
+10. Move class
